@@ -12,11 +12,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.simplon.session3Eval.model.Dinosaure;
+import co.simplon.session3Eval.model.Periode;
 
 @RestController
 @RequestMapping("/api")
 public class DinosaureController {
-
+Periode periode = new Periode();
 	@Autowired
 	private co.simplon.session3Eval.repository.DinosaureRepository dinoRepo;
 	
@@ -74,7 +75,7 @@ public class DinosaureController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le nom !");
 		
 		String diet = dinosaure.getDiet();
-		String nameEra = dinosaure.getEra();
+		int idEra = dinosaure.getId();
 		
 		try {
 			resultDino = dinoRepo.saveAndFlush(dinosaure);
