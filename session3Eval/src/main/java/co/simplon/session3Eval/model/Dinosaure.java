@@ -22,6 +22,6 @@ public class Dinosaure implements Serializable {
 	private int id;
 	private String name;
 	private String diet;
-
+	private String Era;
 
 }
