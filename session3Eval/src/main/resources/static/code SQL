@@ -1,0 +1,30 @@
+#------------------------------------------------------------
+#        Script MySQL.
+#------------------------------------------------------------
+
+
+#------------------------------------------------------------
+# Table: periode
+#------------------------------------------------------------
+
+CREATE TABLE periode(
+        nameEra Varchar (50) NOT NULL ,
+        idEra   Int NOT NULL
+	,CONSTRAINT periode_PK PRIMARY KEY (nameEra)
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: dinosaure
+#------------------------------------------------------------
+
+CREATE TABLE dinosaure(
+        id      Int NOT NULL ,
+        name    Varchar (50) NOT NULL ,
+        diet    Varchar (50) NOT NULL ,
+        nameEra Varchar (50) NOT NULL
+	,CONSTRAINT dinosaure_PK PRIMARY KEY (id)
+
+	,CONSTRAINT dinosaure_periode_FK FOREIGN KEY (nameEra) REFERENCES periode(nameEra)
+)ENGINE=InnoDB;
+
