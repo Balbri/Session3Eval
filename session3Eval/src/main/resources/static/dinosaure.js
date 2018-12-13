@@ -15,13 +15,18 @@ $(document).ready(function() {
 	    $("#id").val(dataRow.id);
 		$("#name").val(dataRow.name);
 		$("#diet").val(dataRow.diet);
-		$("#idEra").val(dataRow.idEra);
+		$("#weight").val(dataRow.weight);
+		$("#id_era").val(dataRow.periode.idEra);
+
 	} );
 	
 	// si vous cliquez sur le bouton click "btn-post"
 	// on appelle la méthode "apprenant_submit()
 	// en lui passant 2 paramètres : la référence du bouton pour le désactiver et la type de méthode, ici POST.
 	$("#btn-post").click(function() {
+		
+		
+		
 		const conf = confirm("Etes-vous sûr de vouloir ajouter cette entrée?");
 		if (conf){
 			dinosaure_submit($("#btn-post"), "POST", table);
@@ -32,13 +37,15 @@ $(document).ready(function() {
 	
 	});
 
-	// si vous cliquez sur le bouton click "btn-put"
-	// on appelle la méthode "apprenant_submit()
-	// en lui passant 2 paramètres : la référence du bouton pour le désactiver et la type de méthode, ici PUT.
-//	$("#btn-put").click(function() {
-//		apprenant_submit($("#btn-put"), "PUT", table);
-//	
-//	});
+//	 si vous cliquez sur le bouton click "btn-put"
+//	 on appelle la méthode "apprenant_submit()
+//	 en lui passant 2 paramètres : la référence du bouton pour le désactiver et la type de méthode, ici PUT.
+	$("#btn-put").click(function() {
+		
+		
+		dinosaure_submit($("#btn-put"), "PUT", table);
+	
+	});
 
 	//click on RESET
 	$("#btn-reset").click(function() {
@@ -52,12 +59,12 @@ $(document).ready(function() {
 		getDino(); // affiche l'apprenant(e) sélectionné(e) dans la DataTable
 	});
 
-//	//click on DELETE
-//	$("#btn-delete").click(function() {
-//		deleteApprenant(); // efface l'apprenant en fonction de l'identifiant
-//		
-//		
-//	});
+	//click on DELETE
+	$("#btn-delete").click(function() {
+		deleteDino(); // efface l'apprenant en fonction de l'identifiant
+		
+		
+	});
 });
 
 /**
@@ -72,7 +79,7 @@ function loadDatatable() {
 	                "sortable" : false
 	            },
 	            {
-	                "targets": [ 3 ],
+	                "targets": [ 4 ],
 	                "visible": true
 	            }
 	        ],
@@ -84,7 +91,8 @@ function loadDatatable() {
 			{"data" : "id"},
 			{"data" : "name"},
 			{"data" : "diet"}, 
-			{"data" : "idEra"} ]
+			{"data" : "weight"},
+			{"data" : "periode.idEra"} ]
 	});
 	
 }
@@ -101,10 +109,16 @@ function dinosaure_submit(button, httpVerb, table) {
 	dinosaure["id"] = $("#id").val();
 	dinosaure["name"] = $("#name").val();
 	dinosaure["diet"] = $("#diet").val();
-	dinosaure["idEra"] = $("#idEra").val();
+	dinosaure["weight"] = $("#weight").val();
+	
+	var idPeriode =  $("#id_era").val();
+	var periode = {	idEra : idPeriode, nameEra : " " };
+	dinosaure["periode"] = periode; //= $("#id_era").val();
+	
+	console.log(dinosaure);
 	
 	// on initialise l'url du back
-	var url = "/api/dinos";
+	var url = "/api/adddino";
 	
 	// si c'est une modification, on passe l'identifiant
 	if(httpVerb == "PUT")
@@ -124,7 +138,7 @@ function dinosaure_submit(button, httpVerb, table) {
 		timeout : 600000,						// délai d'attente
 		success : function(data) {				// si ok
 
-			var json = "<h3>Server Response au format JSON</h3><pre>dinosaure (modifié/ajouté) :<br>" + JSON.stringify(data, null, 4) + "</pre>";
+			var json = "<h3>Server Response au format JSON</h3><pre>dinosaure (modifié/ajouté) :<br>" + JSON.stringify(data, null, 5) + "</pre>";
 			
 			$('#feedbackDinos').html(json); // renvoie les infos aux format JSON adapté au HTML dans la balise "<DIV id="feedbackDinos"> 
 
@@ -152,7 +166,7 @@ function resetForm() {
 	$('#Dino-form')[0].reset();
 }
 
-function resetFeedBackApprenant() {
+function resetFeedBackDinos() {
 	$('#feedbackDinos').html("");
 }
 
@@ -167,7 +181,7 @@ function getDino() {
 	$.ajax({
 		type : "GET",
 		contentType : "application/json",
-		url : "/api/dinos/" + idDino,
+		url : "/api/dino/" + idDino,
 		data : {},
 		dataType : 'json',
 		cache : false,
@@ -179,7 +193,9 @@ function getDino() {
 			$("#id").val(data.id);
 			$("#name").val(data.name);
 			$("#diet").val(data.diet);
-			$("#idEra").val(data.idEra);
+			$("#weight").val(data.weight);
+			$("#id_era").val(data.periode.idEra);
+
 			console.log("SUCCESS : ", data);
 		},
 		error : function(e) {
@@ -204,9 +220,9 @@ function deleteDino() {
 	$.ajax({
 		type : "DELETE",
 		contentType : "application/json",
-		url : "/api/dinos/" + idDinosaure,
-		//data : {},
-		//dataType : 'json',
+		url : "/api/deldino/" + idDinosaure,
+//		data : {},
+//		dataType : 'json',
 		cache : false,
 		timeout : 600000,
 		success : function(data) {

@@ -4,27 +4,25 @@
 
 
 #------------------------------------------------------------
-# Table: periode
+# Table: Periode
 #------------------------------------------------------------
 
-CREATE TABLE periode(
-        idEra   Int  Auto_increment  NOT NULL ,
-        nameEra Varchar (50) NOT NULL
-	,CONSTRAINT periode_PK PRIMARY KEY (idEra)
+CREATE TABLE Periode(
+        id_Era   Int NOT NULL ,
+        name_Era Varchar (50) NOT NULL 
+        ,CONSTRAINT Periode_PK PRIMARY KEY (id_Era)
 )ENGINE=InnoDB;
 
 
 #------------------------------------------------------------
-# Table: dinosaure
+# Table: Dinosaure
 #------------------------------------------------------------
 
-CREATE TABLE dinosaure(
-        id    Int  Auto_increment  NOT NULL ,
-        name  Varchar (50) NOT NULL ,
-        diet  Varchar (50) NOT NULL ,
-        idEra Int NOT NULL
-	,CONSTRAINT dinosaure_PK PRIMARY KEY (id)
-
-	,CONSTRAINT dinosaure_periode_FK FOREIGN KEY (idEra) REFERENCES periode(idEra)
+CREATE TABLE Dinosaure(
+        id     Int  Auto_increment  NOT NULL ,
+        name   Varchar (50) NOT NULL ,
+        poids  Int NOT NULL ,
+        id_Era Int NOT NULL ,
+        CONSTRAINT Dinosaure_PK PRIMARY KEY (id) ,
+	CONSTRAINT Dinosaure_Periode_FK FOREIGN KEY (id_Era) REFERENCES Periode(id_Era)
 )ENGINE=InnoDB;
-

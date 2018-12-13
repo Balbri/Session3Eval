@@ -1,0 +1,103 @@
+#header .logo {
+	display: block;
+	border-bottom: 0;
+	color: inherit;
+	font-weight: 900;
+	letter-spacing: 0.35em;
+	margin: 1em 0 1em 0;
+	text-decoration: none;
+	text-transform: uppercase;
+	display: inline-block;
+}
+
+#header .logo>* {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+#header .logo .symbol {
+	margin-right: 0.65em;
+}
+
+#header .logo .symbol img {
+	display: block;
+	width: 9em;
+	height: 6em;
+}
+button#btn-get.btn.btn-primary.btn-lg{
+	border-style: none;
+	font-size: 12pt;
+	padding-right: 20px;
+	width: 
+	
+}
+button#btn-get.btn.btn-primary.btn-lg:hover{
+	background-color: #CCCCFF;
+	color: #6666CC;
+	border-style: none;
+	font-size: 12pt;
+	
+}
+
+button#btn-post.btn.btn-primary.btn-lg{
+	border-style: none;
+	font-size: 12pt;
+	
+	
+}
+button#btn-post.btn.btn-primary.btn-lg:hover{
+	background-color: #CCCCFF;
+	color: #6666CC;
+	border-style: none;
+	font-size: 12pt;
+	
+}
+
+button#btn-put.btn.btn-primary.btn-lg{
+	border-style: none;
+	font-size: 12pt;
+	
+	
+}
+button#btn-put.btn.btn-primary.btn-lg:hover{
+	background-color: #CCCCFF;
+	color: #6666CC;
+	border-style: none;
+	font-size: 12pt;
+	
+}
+
+button#btn-delete.btn.btn-primary.btn-lg{
+	border-style: none;
+	font-size: 12pt;
+	
+	
+}
+button#btn-delete.btn.btn-primary.btn-lg:hover{
+	background-color: #CCCCFF;
+	color: #6666CC;
+	border-style: none;
+	font-size: 12pt;
+	
+}
+
+button#btn-reset.btn.btn-primary.btn-lg{
+	border-style: none;
+	font-size: 12pt;
+	
+	
+}
+button#btn-reset.btn.btn-primary.btn-lg:hover{
+	background-color: #CCCCFF;
+	color: #6666CC;
+	border-style: none;
+	font-size: 12pt;
+	
+}
+
+.maclasse{
+	font-size: 11pt !important;
+	color: #C52525 !important;
+	margin-left: 10px !important;
+	text-align: left !important;
+}

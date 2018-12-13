@@ -46,12 +46,13 @@ Periode periode = new Periode();
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping(value = "/dinos/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/dino/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> getDino(@PathVariable Integer id){
 		Dinosaure dinosaure = null;
 				
 		try {
-			dinosaure =dinoRepo.findOne(id);
+			dinosaure =(dinoRepo.findOne(id));
+			
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
 		}
@@ -67,16 +68,14 @@ Periode periode = new Periode();
 	 * @param dino
 	 * @return
 	 */
-	@RequestMapping(value = "/dinos", method = RequestMethod.POST)
+	@RequestMapping(value = "/adddino", method = RequestMethod.POST)
 	public ResponseEntity<?> addDino(@RequestBody Dinosaure dinosaure){
 		Dinosaure resultDino = null;
 		String name = dinosaure.getName();
 		if((name == null) || (name.isEmpty()))
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le nom !");
 		
-		String diet = dinosaure.getDiet();
-		int idEra = dinosaure.getId();
-		
+			
 		try {
 			resultDino = dinoRepo.saveAndFlush(dinosaure);
 		} catch (Exception e) {
@@ -93,43 +92,39 @@ Periode periode = new Periode();
 	 * @return
 	 * @throws Exception
 	 */
-//	@RequestMapping(value = "/apprenant/{id}", method = RequestMethod.PUT)
-//	public ResponseEntity<?> updateDino(@RequestBody Apprenant apprenant,@PathVariable Integer id) throws Exception {
-//		Apprenant resultApprenant = null;
-//		String prenom = apprenant.getPrenom();
-//		if((prenom == null) || (prenom.isEmpty()))
-//			
-//			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le prénom !");
-//		
-//		String nom = apprenant.getNom();
-//		if((nom == null) || (nom.isEmpty()))
-//			
-//			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le nom !");
-//		
-//		try {
-//			resultApprenant = apprenantRepository.save(apprenant);
-//			
-//		} catch (Exception e) {
-//			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-//		}
-//		
-//		return ResponseEntity.status(HttpStatus.OK).body(resultApprenant);
-//	}
-//	
-//	/**
-//	 * Détruire
-//	 * @param id
-//	 * @return
-//	 */
-//	@RequestMapping(value = "/apprenant/{id}", method = RequestMethod.DELETE)
-//	public ResponseEntity<?> deleteApprenant(@PathVariable Integer id){
-//		try {
-//		apprenantRepository.delete(id);
-//		} catch (Exception e) {
-//			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-//		}
-//		
-//		return ResponseEntity.status(HttpStatus.OK).body(null);
-//	}
+	@RequestMapping(value = "/adddino/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<?> updateDino(@RequestBody Dinosaure dinosaure,@PathVariable Integer id) throws Exception {
+		Dinosaure resultDinosaure = null;
+		String name = dinosaure.getName();
+		
+		if((name == null) || (name.isEmpty()))
+			
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le prénom !");
+				
+		try {
+			resultDinosaure = dinoRepo.save(dinosaure);
+			
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+		}
+		
+		return ResponseEntity.status(HttpStatus.OK).body(resultDinosaure);
+	}
+	
+	/**
+	 * Détruire
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value = "/deldino/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<?> deleteDinosaure(@PathVariable Integer id){
+		try {
+		dinoRepo.delete(id);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+		}
+		
+		return ResponseEntity.status(HttpStatus.OK).body(null);
+	}
 	
 }
